@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESUME</title>
+    <link rel="stylesheet" href="Resume2.css">
+
+    <script src="https://kit.fontawesome.com/511f922b48.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    
+</head>
+<body>
+    <div class="div1">
+
+        <div class="div2">
+
+            <div class="div4">
+
+            </div>
+ 
+            <div class="div5" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <img src="media/Photo KK.jpg" alt="" draggable="true" id="profile" ondragstart="drag(event)">  
+                <div class="divdrop" ondragover="allowDrop(event)" ondrop="drop(event)">                         
+                    <h1 draggable="true" ondragstart="drag(event)">KISHORE <br> KANNAN</h1>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="div3">  
+
+            <div class="div6">
+                <div class="div8" ondragover="allowDrop(event)" ondrop="drop(event)"> 
+                    <h2 class="h2box2">ABOUT</h2>
+                    <p>To work as a SYstem Manager in an IT company where I will have opprtunities to utilize my skills and contribute to organizational 
+                        and professional growth
+                    </p>  
+
+                    <h2 class="h2box2">CONTACT</h2>                    
+                    <ul id="contact" draggable="true" ondragstart="drag(event)">
+                        <li> <i class="fa-solid fa-phone" ></i> Phone  : 9898989898</li>
+                        <li> <i class="fa-solid fa-envelope" ></i> Email : abc@gmail.com</li>
+                        <li> <i class="fa-brands fa-linkedin"></i> LinkedIn : </li>
+                    </ul>
+
+                    <h2 class="h2box2">EXPERTISE</h2>                  
+                    <ul id="expert" >
+                        <li>UI/UX Designer</li>
+                        <li>Web Developer</li>
+                        <li>Full Stack Developer</li>
+                        <li>Mobile app Development</li>
+                    </ul>
+
+                    <h2 class="h2box2">EXPERIENCE</h2>
+                    <p>
+                        AI WORKSHOP <br>
+                        PHOTOSHOP WORKSHOP <br>
+                        INTERNSHIP CLOUD LOGIC TECHNOLOGIES  <br>
+                    </p>
+
+                    <h2 class="h2box2">TO DO LIST</h2>
+                    <p>
+                       <!-- <input type="text" id="input1" contenteditable="true"> <br>  -->
+                        <input type="text" id="input1">
+                        <button class="button1" onclick="storeLocal()" id="">LOCAL</button>
+                        <h4>TASK:</h4><h4 id="h4res"></h4>
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="div7"> 
+
+                <div class="div9">
+                                
+                    <h2 class="h2box"> <img class="img1" src="media/arrow-removebg-preview.png" alt=""> EDUCATION</h2>
+                    <p>
+                        <strong>PUDUCHERRY TECHNOLOGICAL UNIVERSITY </strong>  <br>
+                        B.Tech Computer Science and
+                        Engineering, in progress. 
+                        <br>
+                        <strong>ST.PATRICK MATRIC HIGHER SECONDARY SCHOOL </strong> <br>
+                        March 2021, passed out
+                    </p>
+
+
+                    <h2 class="h2box"> <img class="img1" src="media/arrow-removebg-preview.png" alt=""> PROGRAMMING SKILLS</h2>
+                    <p> 
+                    C,C++,C#,JAVA   <br>
+                    HTML, CSS, JAVASCRIPT  <br>
+                    MYSQL  <br>
+                    </p>
+                    
+                    <h2 class="h2box"> <img class="img1" src="media/arrow-removebg-preview.png" alt="">LANGUAGES KNOWN</h2>
+                    <p id="chart">
+                        <canvas id="canvas1"></canvas>
+                    </p>
+
+                    <h2 class="h2box"> <img class="img1" src="media/arrow-removebg-preview.png" alt="">ACHIEVED AWARDS</h2>
+                    <p>
+                    LOGO MAKING <br>
+                    AWARD IN VIDEO EDITING<br>
+                    </p>
+
+                    <h2 class="h2box"><img class="img1" src="media/arrow-removebg-preview.png" alt="">INTRO VIDEO</h2>
+                    <video controls>
+                        <source src="media/WIN_20240429_09_30_17_Pro.mp4" type="video/mp4" >
+                    </video> 
+
+
+                    <div class="map">
+                        <button id="map_click" onclick="getlocation();">  GET CURRENT LOCATION</button> 
+                       <div id="map_Area">
+
+                       </div> 
+
+                       </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>  
+        
+        
+                                     
+
+    </div>
+
+    <script src="https://maps.google.com/maps/api/js?sensor=false"> </script>  
+
+    <script>
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+        function drag(ev){
+            ev.dataTransfer.setData("text", ev.target.id);            
+        }
+        function drop(ev){
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+
+        function drawImg(){
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            let img = document.getElementById("profile1");
+            ctx.drawImage(img, 0, 0);
+        
+        }
+       
+
+        function getlocation(){ 
+               if(navigator.geolocation){ 
+                   navigator.geolocation.getCurrentPosition(showPos, showErr); 
+               }
+               else{
+                   alert("Sorry! your Browser does not support Geolocation API")
+               }
+           } 
+           //Showing Current Position on Google Map
+           function showPos(position){ 
+            let map = document.getElementById("map_Area");
+            map.style.height = "300px";
+            map.style.width = "400px";
+               latt = position.coords.latitude; 
+               long = position.coords.longitude; 
+               var lattlong = new google.maps.LatLng(latt, long); 
+               var myOptions = { 
+                   center: lattlong, 
+                   zoom: 15, 
+                   mapTypeControl: true, 
+                   navigationControlOptions: {style:google.maps.NavigationControlStyle.SMALL} 
+               } 
+               var maps = new google.maps.Map(document.getElementById("map_Area"), myOptions); 
+               var markers = 
+               new google.maps.Marker({position:lattlong, map:maps, title:"You are here!"}); 
+           }
+           
+           //Handling Error and Rejection
+           function showErr(error) {
+             switch(error.code){
+             case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation API.");
+             break;
+            case error.POSITION_UNAVAILABLE:
+            alert("USer location information is unavailable.");
+           break;
+           case error.TIMEOUT:
+           alert("The request to get user location timed out.");
+           break;
+          case error.UNKNOWN_ERROR:
+           alert("An unknown error occurred.");
+           break;
+          }
+       }     
+       
+    //    function storeLocal(){
+    //     let val = document.getElementById("input1").value;
+    //     document.getElementById("input1").value = "";
+
+    //     if(typeof(Storage) !== "undefined"){
+    //         localStorage.setItem("key", val);
+            
+    //     }
+    //     else{
+    //         document.getElementById("h4res").innerHTML = "No Local storage"
+    //     }
+
+    //    }
+
+
+        function storeLocal() {
+        let val = document.getElementById("input1").value;
+        document.getElementById("input1").value = "";
+
+            if (typeof(Storage) !== "undefined") {
+                // Store the value in localStorage
+                let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
+                storedData.push(val);
+                localStorage.setItem("storedData", JSON.stringify(storedData));
+
+                // Update the display in <h4> with remove buttons
+                updateDisplay();
+            } else {
+                document.getElementById("h4res").innerHTML = "No Local storage";
+            }
+        }
+
+        function removeItem(index) {
+            // Remove the item at the specified index from localStorage
+            let storedData = JSON.parse(localStorage.getItem("storedData"));
+            storedData.splice(index, 1);
+            localStorage.setItem("storedData", JSON.stringify(storedData));
+
+            // Update the display in <h4> after removal
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
+            let h4res = document.getElementById("h4res");
+            h4res.innerHTML = "";
+
+            // Update the display with stored items and remove buttons
+            storedData.forEach((item, index) => {
+                let textNode = document.createTextNode(item);
+                let removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.classList.add("button1");  
+                removeButton.addEventListener("click", function() {
+                    removeItem(index);
+                });
+
+                let listItem = document.createElement("div");
+                listItem.appendChild(textNode);
+                listItem.appendChild(removeButton);
+                h4res.appendChild(listItem);
+            });
+        }
+
+
+       function storeSession(){
+        let val = document.getElementById("input1").value;
+        document.getElementById("input1").value = "";
+        document.getElementById("h4res").innerHTML = "";
+
+        if(typeof(Storage) !== "undefined"){
+            sessionStorage.setItem("key",val);            
+        }
+        else{
+            document.getElementById("h4res").innerHTML = "No Session storage"
+        }
+       }
+
+       
+
+       //CANVAS
+       const xValues = ["English", "Tamil", "German"];
+       const yValues = [50, 50, 30];
+       const barColors = [  "#b91d47","#00aba9","#2b5797",];
+
+       new Chart("canvas1", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        },
+        options: {
+            title: {
+            display: true
+            }
+        }
+    });
+
+    </script>
+</body>
+</html>
